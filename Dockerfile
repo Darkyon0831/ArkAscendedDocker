@@ -11,7 +11,7 @@ ENV TINI_VERSION=v0.19.0
 # Install dependencies
 RUN \
  	apt-get update; \
-  	apt-get install -y lib32gcc-s1
+  	apt-get install -y lib32gcc-s1; \
         apt-get install -y --no-install-recommends jq curl wget tar unzip nano gzip iproute2 procps software-properties-common dbus lib32gcc-s1; \
 
         apt-get clean; \
