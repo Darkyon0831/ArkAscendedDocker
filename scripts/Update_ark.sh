@@ -1,1 +1,1 @@
-$STEAM_CMD_DIR +login anonymous +@sSteamCmdForcePlatformType windows +force_install_dir $ARK_FOLDER +app_update 2430930 +quit
+$STEAM_CMD_DIR/steamcmd +login anonymous +@sSteamCmdForcePlatformType windows +force_install_dir $ARK_FOLDER +app_update 2430930 +quit
