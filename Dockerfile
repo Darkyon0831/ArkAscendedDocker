@@ -23,7 +23,9 @@ RUN \
 	mkdir $STEAM_CMD_DIR; \
 	chown $PUID:$PGID $STEAM_CMD_DIR
 WORKDIR $STEAM_CMD_DIR
-RUN wget -qO- https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf -
+RUN \
+	wget -qO- https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf -; \
+ 	chmod +x $STEAM_CMD_DIR/steamcmd.sh
 
 # Add user
 RUN \
