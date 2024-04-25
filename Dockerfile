@@ -25,7 +25,7 @@ RUN \
 WORKDIR $STEAM_CMD_DIR
 RUN \
 	wget -qO- https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf -; \
- 	chmod +x $STEAM_CMD_DIR/steamcmd.sh
+ 	chmod +x $STEAM_CMD_DIR/steamcmd.sh; \
   	chmod +x $STEAM_CMD_DIR/linux32/steamcmd
 
 # Add user
