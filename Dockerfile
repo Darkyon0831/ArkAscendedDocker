@@ -9,32 +9,28 @@ ENV ARK_FOLDER="/home/dark/arkserver"
 ENV TINI_VERSION=v0.19.0
 
 # Install dependencies
-RUN <<EOF
-	add-apt-repository multiverse
-	dpkg --add-architecture i386
-        apt-get install -y --no-install-recommends jq curl wget tar unzip nano gzip iproute2 procps software-properties-common dbus lib32gcc-s1
+RUN \
+	add-apt-repository multiverse; \
+	dpkg --add-architecture i386; \
+        apt-get install -y --no-install-recommends jq curl wget tar unzip nano gzip iproute2 procps software-properties-common dbus lib32gcc-s1; \
 
-        apt-get clean
-	rm -rf /var/lib/apt/lists/*
-EOF
+        apt-get clean; \
+	rm -rf /var/lib/apt/lists/* 
 
 # Install steamcmd
-RUN <<EOF
-	mkdir ${STEAM_CMD_DIR}
+RUN \
+	mkdir ${STEAM_CMD_DIR}; \
 	chown $PUID:$PGID ${STEAM_CMD_DIR}
-EOF
 WORKDIR ${STEAM_CMD_DIR}
-RUN <<EOF	
-	curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -;
-EOF
+RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
 # Add user
-RUN <<EOF
-	groupadd -g $PGID
-	useradd -b /home/dark -g $PGID -u $PUID -G users -m dark
-	mkdir $ARK_FOLDER
+RUN \
+	groupadd -g $PGID; \
+	useradd -b /home/dark -g $PGID -u $PUID -G users -m dark; \
+	mkdir $ARK_FOLDER; \
 	chown $PUID:$PGID $ARK_FOLDER
-EOF
+
 
 # Install TINI
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
