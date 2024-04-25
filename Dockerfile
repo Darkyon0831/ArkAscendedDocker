@@ -25,7 +25,7 @@ RUN <<EOF
 EOF
 WORKDIR ${STEAM_CMD_DIR}
 RUN <<EOF	
-	curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
+	curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -;
 EOF
 
 # Add user
