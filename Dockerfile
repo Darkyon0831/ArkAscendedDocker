@@ -19,14 +19,13 @@ RUN \
 	rm -rf /var/lib/apt/lists/* 
 
 # Install steamcmd
-RUN \
-	mkdir $STEAM_CMD_DIR; \
-	chown $PUID:$PGID $STEAM_CMD_DIR
+RUN mkdir $STEAM_CMD_DIR
 WORKDIR $STEAM_CMD_DIR
 RUN \
 	wget -qO- https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf -; \
  	chmod +x $STEAM_CMD_DIR/steamcmd.sh; \
-  	chmod +x $STEAM_CMD_DIR/linux32/steamcmd
+  	chmod +x $STEAM_CMD_DIR/linux32/steamcmd; \
+   	chown -R $PUID:$PGID $STEAM_CMD_DIR
 
 # Add user
 RUN \
