@@ -27,7 +27,7 @@ RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_osx.tar
 
 # Add user
 RUN \
-	groupadd -g $PGID; \
+	groupadd -g $PGID dark; \
 	useradd -b /home/dark -g $PGID -u $PUID -G users -m dark; \
 	mkdir $ARK_FOLDER; \
 	chown $PUID:$PGID $ARK_FOLDER
