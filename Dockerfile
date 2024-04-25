@@ -25,7 +25,6 @@ RUN \
 WORKDIR $STEAM_CMD_DIR
 RUN \
 	curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_osx.tar.gz" | tar zxvf -; \
- 	chown $PUID:$PGID $STEAM_CMD_DIR/steamcmd; \
   	chmod +x $STEAM_CMD_DIR/steamcmd
 
 # Add user
