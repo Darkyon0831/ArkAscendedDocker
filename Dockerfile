@@ -40,7 +40,7 @@ EOF
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
-scripts
+# Copy over scripts to image
 COPY --chown=dark:dark scripts/ /home/dark/scripts
 RUN chmod +x /home/dark/scripts/*.sh
 
