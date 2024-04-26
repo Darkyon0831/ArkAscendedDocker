@@ -1,6 +1,6 @@
 #!/bin/bash
 echo $ARK_FOLDER
-$STEAM_CMD_DIR/steamcmd.sh +force_install_dir /home/dark/arkserver +login anonymous +@sSteamCmdForcePlatformType windows +app_update 2430930 +quit
+$STEAM_CMD_DIR/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir /home/dark/arkserver +login anonymous +app_update 2430930 +quit
 echo "\nManifest"
 cat /home/dark/dark/Steam/steamapps/appmanifest_2430930.acf
 
