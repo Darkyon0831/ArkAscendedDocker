@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
-ENV PUID=1000
-ENV PGID=1000
+ENV PUID=1005
+ENV PGID=1005
 
 ENV STEAM_CMD_DIR="/opt/steamcmd"
 ENV ARK_FOLDER="/home/dark/arkserver"
