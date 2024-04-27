@@ -27,7 +27,7 @@ Port=7780
 ServerPassword="lolipop"
 RconPort="27020"
 
-wine64
+wine --version
 
 # Update_ark.sh
 
