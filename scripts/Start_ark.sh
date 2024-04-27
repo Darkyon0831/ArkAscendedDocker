@@ -33,14 +33,18 @@ Xvfb :1 -screen 0 1024x768x16 &
 
 BATTLEEYE_ARG=""
 MODS_ARG=""
+CLUSTER_ID_ARG=""
 
 if [ $BATTLEYE = "FALSE" ]; then
     BATTLEEYE_ARG="-NoBattlEye"
 fi 
 
 if [ -n $MOD_IDS ]; then
-    MODS_ARG="-mods=${MOD_IDS}"
+    MODS_ARG="-mods=$MOD_IDS"
 fi
 
+if [ -n $CLUSTER_ID ]; then
+    CLUSTER_ID_ARG="-clusterID=$CLUSTER_ID
+fi
 
-DISPLAY=:1 wine "$ARK_FOLDER"/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MAP_NAME"?listen?SessionName="$SESSION_NAME"?MaxPlayers="$MAX_PLAYERS"?ServerPassword="$SERVER_PASSWORD"?ServerAdminPassword="$SERVER_ADMIN_PASSWORD"?RCONEnabled=True?RCONPort="$RconPort""$CUSTOM_ARGS" -Port="$Port" -log "$BATTLEEYE_ARG" -WinLiveMaxPlayers="$MAX_PLAYERS" "$MODS_ARG"
+DISPLAY=:1 wine "$ARK_FOLDER"/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MAP_NAME"?listen?SessionName="$SESSION_NAME"?MaxPlayers="$MAX_PLAYERS"?ServerPassword="$SERVER_PASSWORD"?ServerAdminPassword="$SERVER_ADMIN_PASSWORD"?RCONEnabled=True?RCONPort="$RconPort""$CUSTOM_ARGS" -Port="$Port" -log "$BATTLEEYE_ARG" -WinLiveMaxPlayers="$MAX_PLAYERS" "$MODS_ARG" "$CLUSTER_ID_ARG"
