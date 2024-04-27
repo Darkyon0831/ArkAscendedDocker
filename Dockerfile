@@ -36,7 +36,7 @@ RUN \
 	dpkg --add-architecture i386; \
  	apt-get update -y; \
   	apt-get install -y lib32gcc-s1; \
-    apt-get install -y --no-install-recommends jq screen xvfb wine64 curl wget tar unzip nano gzip iproute2 procps software-properties-common dbus lib32gcc-s1; \
+    apt-get install -y --no-install-recommends jq xvfb wine64 curl wget tar unzip nano gzip iproute2 procps software-properties-common dbus lib32gcc-s1; \
 
     apt-get clean; \
 	rm -rf /var/lib/apt/lists/* 
@@ -69,4 +69,4 @@ RUN chmod +x /home/dark/scripts/*.sh
 USER dark
 WORKDIR /home/dark
 
-ENTRYPOINT ["/tini", "--", "/home/dark/scripts/Update_ark.sh"]
+ENTRYPOINT ["/tini", "--", "/home/dark/scripts/Start_ark.sh"]
