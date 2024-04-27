@@ -37,7 +37,7 @@ RUN \
  	apt-get update; \
   	apt-get install -y lib32gcc-s1; \
     apt-get install -y --no-install-recommends jq xvfb curl wget tar unzip nano gzip iproute2 procps software-properties-common dbus lib32gcc-s1; \
-	apt install -y wine32; \
+	apt install -y wine64; \
 
     apt-get clean; \
 	rm -rf /var/lib/apt/lists/* 
