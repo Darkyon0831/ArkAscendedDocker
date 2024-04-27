@@ -34,7 +34,7 @@ Xvfb :1 -screen 0 1024x768x16 &
 BATTLEEYE_ARG=""
 MODS_ARG=""
 
-if [ $BATTLEYE = "TRUE" ]; then
+if [ $BATTLEYE = "FALSE" ]; then
     BATTLEEYE_ARG="-NoBattlEye"
 fi 
 
