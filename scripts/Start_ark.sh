@@ -27,8 +27,6 @@ Port=7780
 ServerPassword="lolipop"
 RconPort="27020"
 
-wine --version
+Update_ark.sh
 
-# Update_ark.sh
-
-# wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MapName"?listen?SessionName="$ServerName"?Port="$Port"?MaxPlayers=5?ServerPassword="$ServerPassword" -log -NoBattleEye -WinLiveMaxPlayers=5 & >> /home/dark/.server.pid
+wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MapName"?listen?SessionName="$ServerName"?Port="$Port"?MaxPlayers=5?ServerPassword="$ServerPassword" -log -NoBattleEye -WinLiveMaxPlayers=5 & >> /home/dark/.server.pid
