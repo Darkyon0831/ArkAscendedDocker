@@ -27,6 +27,8 @@ Port=7780
 ServerPassword="lolipop"
 RconPort="27020"
 
+Xvfb :1 -screen 0 1024x768x16 &
+
 ./scripts/Update_ark.sh
 
-wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MapName"?listen?SessionName="$ServerName"?Port="$Port"?MaxPlayers=5?ServerPassword="$ServerPassword" -log -NoBattlEye -WinLiveMaxPlayers=5
+DISPLAY=:1 wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MapName"?listen?SessionName="$ServerName"?Port="$Port"?MaxPlayers=5?ServerPassword="$ServerPassword" -log -NoBattlEye -WinLiveMaxPlayers=5
