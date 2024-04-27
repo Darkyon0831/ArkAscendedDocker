@@ -21,9 +21,9 @@
 # SOFTWARE.
 
 #!/bin/bash
-ServerName="Darkyon test server"
-MapName="ScorchedEarth_WP"
-Port=7780
+ServerName="$SESSION_NAME"
+MapName="$MAP_NAME"
+Port_="$Port"
 ServerPassword="lolipop"
 RconPort=27020
 
@@ -31,4 +31,16 @@ Xvfb :1 -screen 0 1024x768x16 &
 
 ./scripts/Update_ark.sh
 
-DISPLAY=:1 wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MapName"?listen?SessionName="$ServerName"?MaxPlayers=5?ServerPassword="$ServerPassword"?ServerAdminPassword=Darkyon0831?RCONEnabled=True?RCONPort="$RconPort" -Port="$Port" -log -NoBattlEye -WinLiveMaxPlayers=5
+BATTLEEYE_ARG=""
+MODS_ARG=""
+
+if [ $BATTLEYE = "TRUE" ]; then
+    BATTLEEYE_ARG="-NoBattlEye"
+fi 
+
+if [ -n $MOD_IDS ]; then
+    MODS_ARG="-mods=${MOD_IDS}"
+fi
+
+
+DISPLAY=:1 wine "$ARK_FOLDER"/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MAP_NAME"?listen?SessionName="$SESSION_NAME"?MaxPlayers="$MAX_PLAYERS"?ServerPassword="$SERVER_PASSWORD"?ServerAdminPassword="$SERVER_ADMIN_PASSWORD"?RCONEnabled=True?RCONPort="$RconPort" -Port="$Port" -log "$BATTLEEYE_ARG" -WinLiveMaxPlayers="$MAX_PLAYERS" "$MODS_ARG"
