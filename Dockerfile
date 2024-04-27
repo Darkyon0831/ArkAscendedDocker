@@ -56,8 +56,9 @@ RUN \
 	groupadd -g $PGID dark; \
 	useradd -b /home/dark -g $PGID -u $PUID -G users -m dark; \
 	mkdir $ARK_FOLDER; \
-	chown $PUID:$PGID $ARK_FOLDER
-
+	chown $PUID:$PGID $ARK_FOLDER; \
+	mkdir -R $ARK_FOLDER/ShooterGame/Saved; \
+	chown $PUID:$PGID $ARK_FOLDER/ShooterGame/Saved
 
 # Install TINI
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
