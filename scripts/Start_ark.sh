@@ -31,4 +31,4 @@ Xvfb :1 -screen 0 1024x768x16 &
 
 ./scripts/Update_ark.sh
 
-DISPLAY=:1 wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MapName"?listen?SessionName="$ServerName"?MaxPlayers=5?ServerPassword="$ServerPassword" -Port="$Port" -log -NoBattlEye -WinLiveMaxPlayers=5
+DISPLAY=:1 wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MapName"?listen?SessionName="$ServerName"?MaxPlayers=5?ServerPassword="$ServerPassword"?ServerAdminPassword=Darkyon0831 -Port="$Port" -log -NoBattlEye -WinLiveMaxPlayers=5
