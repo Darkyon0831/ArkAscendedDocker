@@ -24,16 +24,17 @@
 
 #!/bin/bash
 time_to_wait="$1"
+rcon_command=./home/dark/scripts/rcon_command.sh
 
 if [ "$time_to_wait" = "" ]; then 
     time_to_wait=0 
 fi
 
 if [ "$time_to_wait" -gt 0 ]; then
-    /home/dark/scripts/rcon_command "Broadcast Server shutdown started...\nTime to shutdown: $time_to_wait secconds"
+    $rcon_command "Broadcast Server shutdown started...\nTime to shutdown: $time_to_wait secconds"
     sleep "$time_to_wait"
-    /home/dark/scripts/rcon_command "SaveWorld"
+    $rcon_command "SaveWorld"
 else
-    /home/dark/scripts/rcon_command "Broadcast Server immidiate shutdown started..."
-    /home/dark/scripts/rcon_command "SaveWorld"
+    $rcon_command "Broadcast Server immidiate shutdown started..."
+    $rcon_command "SaveWorld"
 fi
