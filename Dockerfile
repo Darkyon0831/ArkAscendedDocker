@@ -52,6 +52,13 @@ RUN \
   	chmod +x $STEAM_CMD_DIR/linux32/steamcmd; \
    	chown -R $PUID:$PGID $STEAM_CMD_DIR
 
+# Add user
+RUN \
+	groupadd -g $PGID dark; \
+	useradd -b /home/dark -g $PGID -u $PUID -G users -m dark; \
+	mkdir $ARK_FOLDER; \
+	chown $PUID:$PGID $ARK_FOLDER
+
 # Install rcon-cli
 RUN mkdir /home/dark/temp
 WORKDIR /home/dark/temp
@@ -59,13 +66,6 @@ RUN \
 	wget -qO- https://github.com/itzg/rcon-cli/releases/download/1.6.5/rcon-cli_1.6.5_linux_amd64.tar.gz | tar xvz; \
 	mv rcon-cli /usr/local/bin/rcon_cli; \
 	chmod +x /usr/local/bin/rcon_cli
-
-# Add user
-RUN \
-	groupadd -g $PGID dark; \
-	useradd -b /home/dark -g $PGID -u $PUID -G users -m dark; \
-	mkdir $ARK_FOLDER; \
-	chown $PUID:$PGID $ARK_FOLDER
 
 # Install TINI
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
