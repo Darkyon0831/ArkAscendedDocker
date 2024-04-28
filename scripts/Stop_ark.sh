@@ -38,4 +38,5 @@ if [ "$time_to_wait" -gt 0 ]; then
 else
     $rcon_command "Broadcast Server immidiate shutdown started..."
     $rcon_command "SaveWorld"
+    $rcon_command "doexit"
 fi
