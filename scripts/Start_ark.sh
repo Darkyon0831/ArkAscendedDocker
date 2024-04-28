@@ -21,6 +21,9 @@
 # SOFTWARE.
 
 #!/bin/bash
+
+source "/home/dark/scripts/common.sh"
+
 ServerName="$SESSION_NAME"
 MapName="$MAP_NAME"
 Port_="$Port"
@@ -46,11 +49,9 @@ if [  $MOD_IDS != ""  ] && [ $MOD_IDS != " " ]; then
     MODS_ARG="-mods=$MOD_IDS"
 fi
 
-if [ -n $CLUSTER_ID ]; then
+if [  $CLUSTER_ID != ""  ] && [ $CLUSTER_ID != " " ]; then
     CLUSTER_ID_ARG="-clusterID=$CLUSTER_ID"
 fi
-
-echo "$CLUSTER_ID_ARG"
 
 server_command="DISPLAY=:1 wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe $MAP_NAME?listen?SessionName=$SESSION_NAME?MaxPlayers=$MAX_PLAYERS?ServerPassword=$SERVER_PASSWORD?ServerAdminPassword=$SERVER_ADMIN_PASSWORD?RCONEnabled=True?RCONPort=$RconPort$CUSTOM_ARGS -Port=$Port -log $BATTLEEYE_ARG -WinLiveMaxPlayers=$MAX_PLAYERS $MODS_ARG $CLUSTER_ID_ARG"
 
@@ -58,24 +59,29 @@ if [ -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; then
     rm "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log"
 fi
 
-echo "Starting server using wine...."
+print_message_color_space "Starting server using wine...."
 bash -c "$server_command" &
 
 Server_Pid=$!
-echo "Server process started with PID: $Server_Pid"
 
-echo "$Pid_File"
+print_message_color_space "Server process started with PID: $Server_Pid"
+
+if [ -f "$Pid_File" ]; then
+    rm "$Pid_File"
+fi
+
 touch "$Pid_File"
 echo "$Server_Pid" > "$Pid_File"
-echo "PID $Server_Pid written to $Pid_File"
+
+print_message "PID $Server_Pid written to $Pid_File"
 
 timeout=30
 elapsed=0
-echo "Waiting for ShooterGame.log to be created..."
+print_message_color_space "Waiting for ShooterGame.log to be created..."
 while [ ! -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; do
     if [ $elapsed -ge $timeout ]; then
-        echo "Error: ShooterGame.log not created within the specified timeout. Server may have failed to start."
-        echo "Please check the server logs for more information."
+        print_message "Error: ShooterGame.log not created within the specified timeout. Server may have failed to start."
+        print_message "Please check the server logs for more information."
         kill $Server_Pid
         exit 1
     fi
@@ -84,14 +90,15 @@ while [ ! -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; do
     elapsed=$((elapsed + 2))
 done
 
-echo "Found ShooterGame.log file, will now tail :D"
+print_message_color_space "Found ShooterGame.log file, will now tail :D"
+cat "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log"
 tail -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" &
 Tail_Pid=$!
 
 elapsed=0
 while [ $elapsed -lt $timeout ]; do
-    if [ -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ] && grep -q "Server started" "$ASA_DIR/ShooterGame/Saved/Logs/ShooterGame.log"; then
-        echo "Server started successfully. PID: $SERVER_PID"
+    if [ -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ] && grep -q "Server started" "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log"; then
+        print_message_color_space "Server started successfully. PID: $SERVER_PID"
         break
     fi
     sleep 10
@@ -99,7 +106,7 @@ while [ $elapsed -lt $timeout ]; do
 done
 
 wait "$Server_Pid"
-echo "Server stopped"
+print_message "Server stopped"
 kill "$Tail_Pid"
-echo "Stopped tailing ShooterGame.log."
+print_message "Stopped tailing ShooterGame.log."
 
