@@ -28,8 +28,6 @@ ServerPassword="lolipop"
 RconPort=27020
 Pid_File="/home/dark/.server.pid"
 
-trap shutdown_handler SIGTERM
-
 Xvfb :1 -screen 0 1024x768x16 &
 
 /home/dark/scripts/Update_ark.sh
@@ -82,6 +80,7 @@ while [ ! -f "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; do
         exit 1
     fi
     sleep 2
+    ls "$ASA_FOLDER/ShooterGame/Saved/Logs"
     elapsed=$((elapsed + 2))
 done
 
