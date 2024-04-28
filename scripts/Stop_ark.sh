@@ -34,6 +34,7 @@ if [ "$time_to_wait" -gt 0 ]; then
     $rcon_command "Broadcast Server shutdown started...\nTime to shutdown: $time_to_wait secconds"
     sleep "$time_to_wait"
     $rcon_command "SaveWorld"
+    $rcon_command "doexit"
 else
     $rcon_command "Broadcast Server immidiate shutdown started..."
     $rcon_command "SaveWorld"
