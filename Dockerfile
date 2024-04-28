@@ -47,9 +47,18 @@ RUN mkdir $STEAM_CMD_DIR
 WORKDIR $STEAM_CMD_DIR
 RUN \
 	wget -qO- https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf -; \
+	rm steamcmd_linux.tar.gz
  	chmod +x $STEAM_CMD_DIR/steamcmd.sh; \
   	chmod +x $STEAM_CMD_DIR/linux32/steamcmd; \
    	chown -R $PUID:$PGID $STEAM_CMD_DIR
+
+# Install rcon-cli
+RUN mkdir /home/dark/temp
+WORKDIR /home/dark/temp
+RUN \
+	wget -qO- https://github.com/itzg/rcon-cli/releases/download/1.6.5/rcon-cli_1.6.5_linux_amd64.tar.gz | tar xvz; \
+	mv rcon-cli /usr/local/bin/rcon_cli; \
+	chmod +x /usr/local/bin/rcon_cli
 
 # Add user
 RUN \
