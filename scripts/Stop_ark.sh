@@ -20,8 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Stop_ark.sh <time_to_wait? default is 0 >
-
 #!/bin/bash
 time_to_wait="$1"
 rcon_command=/home/dark/scripts/rcon_command.sh
