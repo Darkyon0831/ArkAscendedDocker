@@ -29,12 +29,15 @@ if [ "$time_to_wait" = "" ]; then
 fi
 
 if [ "$time_to_wait" -gt 0 ]; then
-    $rcon_command "Broadcast Server shutdown started...\nTime to shutdown: $time_to_wait secconds"
+    $rcon_command "SetMessageOfTheDay Server shutdown started...\nTime to shutdown: $time_to_wait secconds"
+    $rcon_command "ShowMessageOfTheDay"
     sleep "$time_to_wait"
     $rcon_command "SaveWorld"
     $rcon_command "doexit"
 else
-    $rcon_command "Broadcast Server immidiate shutdown started..."
+    $rcon_command "SetMessageOfTheDay Server immidiate shutdown started..."
+    $rcon_command "ShowMessageOfTheDay"
+    sleep 6
     $rcon_command "SaveWorld"
     $rcon_command "doexit"
 fi
