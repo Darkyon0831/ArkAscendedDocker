@@ -58,7 +58,8 @@ RUN \
 	useradd -b /home/dark -g $PGID -u $PUID -G users -m dark; \
 	mkdir $ARK_FOLDER; \
 	chown $PUID:$PGID $ARK_FOLDER
-
+	chown $PUID:$PGID /home/dark
+ 
 # Install rcon-cli
 RUN mkdir /home/dark/temp
 WORKDIR /home/dark/temp
