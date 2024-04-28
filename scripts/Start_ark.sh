@@ -54,8 +54,8 @@ echo "$CLUSTER_ID_ARG"
 
 server_command="DISPLAY=:1 wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe $MAP_NAME?listen?SessionName=$SESSION_NAME?MaxPlayers=$MAX_PLAYERS?ServerPassword=$SERVER_PASSWORD?ServerAdminPassword=$SERVER_ADMIN_PASSWORD?RCONEnabled=True?RCONPort=$RconPort$CUSTOM_ARGS -Port=$Port -log $BATTLEEYE_ARG -WinLiveMaxPlayers=$MAX_PLAYERS $MODS_ARG $CLUSTER_ID_ARG"
 
-if [ -f "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; then
-    rm "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log"
+if [ -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; then
+    rm "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log"
 fi
 
 echo "Starting server using wine...."
@@ -72,7 +72,7 @@ echo "PID $Server_Pid written to $Pid_File"
 timeout=30
 elapsed=0
 echo "Waiting for ShooterGame.log to be created..."
-while [ ! -f "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; do
+while [ ! -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; do
     if [ $elapsed -ge $timeout ]; then
         echo "Error: ShooterGame.log not created within the specified timeout. Server may have failed to start."
         echo "Please check the server logs for more information."
@@ -80,17 +80,17 @@ while [ ! -f "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; do
         exit 1
     fi
     sleep 2
-    ls "$ASA_FOLDER/ShooterGame/Saved/Logs"
+    ls "$ARK_FOLDER/ShooterGame/Saved/Logs"
     elapsed=$((elapsed + 2))
 done
 
 echo "Found ShooterGame.log file, will now tail :D"
-tail -f "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" &
+tail -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" &
 Tail_Pid=$!
 
 elapsed=0
 while [ $elapsed -lt $timeout ]; do
-    if [ -f "$ASA_DIR/ShooterGame/Saved/Logs/ShooterGame.log" ] && grep -q "Server started" "$ASA_DIR/ShooterGame/Saved/Logs/ShooterGame.log"; then
+    if [ -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ] && grep -q "Server started" "$ASA_DIR/ShooterGame/Saved/Logs/ShooterGame.log"; then
         echo "Server started successfully. PID: $SERVER_PID"
         break
     fi
