@@ -26,7 +26,7 @@ port="$RCON_PORT"
 command="$1"
 password="$SERVER_ADMIN_PASSWORD"
 
-if [ $1 != "" ]; then
+if [ "$1" != "" ]; then
     rcon_cli --host "$host" --port "$port" --password "$password" "$command"
 else 
     echo "Please enter command to send"
