@@ -66,6 +66,7 @@ bash -c "$server_command" &
 Server_Pid=$!
 echo "Server process started with PID: $Server_Pid"
 
+echo "$Pid_File"
 touch "$Pid_File"
 echo "$Server_Pid" > "$Pid_File"
 echo "PID $Server_Pid written to $Pid_File"
