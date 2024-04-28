@@ -64,7 +64,7 @@ bash -c "$server_command" &
 
 Server_Pid=$!
 
-print_message_color_space "Server process started with PID: $Server_Pid"
+print_message_color "Server process started with PID: $Server_Pid"
 
 if [ -f "$Pid_File" ]; then
     rm "$Pid_File"
