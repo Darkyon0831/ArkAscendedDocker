@@ -41,6 +41,7 @@ fi
 
 if [ -n $MOD_IDS ]; then
     echo "Here"
+    echo $MOD_IDS
     MODS_ARG="-mods=$MOD_IDS"
 fi
 
