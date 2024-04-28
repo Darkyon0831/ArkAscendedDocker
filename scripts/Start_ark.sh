@@ -26,10 +26,13 @@ MapName="$MAP_NAME"
 Port_="$Port"
 ServerPassword="lolipop"
 RconPort=27020
+$Pid_File="/home/dark/.server.pid"
+
+trap shutdown_handler SIGTERM
 
 Xvfb :1 -screen 0 1024x768x16 &
 
-./scripts/Update_ark.sh
+/home/dark/scripts/Update_ark.sh
 
 BATTLEEYE_ARG=""
 MODS_ARG=""
@@ -51,4 +54,52 @@ fi
 
 echo "$CLUSTER_ID_ARG"
 
-DISPLAY=:1 wine "$ARK_FOLDER"/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MAP_NAME"?listen?SessionName="$SESSION_NAME"?MaxPlayers="$MAX_PLAYERS"?ServerPassword="$SERVER_PASSWORD"?ServerAdminPassword="$SERVER_ADMIN_PASSWORD"?RCONEnabled=True?RCONPort="$RconPort""$CUSTOM_ARGS" -Port="$Port" -log "$BATTLEEYE_ARG" -WinLiveMaxPlayers="$MAX_PLAYERS" "$MODS_ARG" "$CLUSTER_ID_ARG"
+server_command="DISPLAY=:1 wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe $MAP_NAME?listen?SessionName=$SESSION_NAME?MaxPlayers=$MAX_PLAYERS?ServerPassword=$SERVER_PASSWORD?ServerAdminPassword=$SERVER_ADMIN_PASSWORD?RCONEnabled=True?RCONPort=$RconPort$CUSTOM_ARGS -Port=$Port -log $BATTLEEYE_ARG -WinLiveMaxPlayers=$MAX_PLAYERS $MODS_ARG $CLUSTER_ID_ARG"
+
+if [ -f "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; then
+    rm "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log"
+fi
+
+echo "Starting server using wine...."
+bash -c "$server_command" &
+
+Server_Pid=$!
+echo "Server process started with PID: $Server_Pid"
+
+touch "$Pid_File"
+echo "$Server_Pid" > "$Pid_File"
+echo "PID $Server_Pid written to $Pid_File"
+
+timeout=30
+elapsed=0
+echo "Waiting for ShooterGame.log to be created..."
+while [ ! -f "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; do
+    if [ $elapsed -ge $timeout ]; then
+        echo "Error: ShooterGame.log not created within the specified timeout. Server may have failed to start."
+        echo "Please check the server logs for more information."
+        kill $Server_Pid
+        exit 1
+    fi
+    sleep 2
+    elapsed=$((elapsed + 2))
+done
+
+echo "Found ShooterGame.log file, will now tail :D"
+tail -f "$ASA_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" &
+Tail_Pid=$!
+
+elapsed=0
+while [ $elapsed -lt $timeout ]; do
+    if [ -f "$ASA_DIR/ShooterGame/Saved/Logs/ShooterGame.log" ] && grep -q "Server started" "$ASA_DIR/ShooterGame/Saved/Logs/ShooterGame.log"; then
+        echo "Server started successfully. PID: $SERVER_PID"
+        break
+    fi
+    sleep 10
+    elapsed=$((elapsed + 10))
+done
+
+wait "$Server_Pid"
+echo "Server stopped"
+kill "$Tail_Pid"
+echo "Stopped tailing ShooterGame.log."
+
