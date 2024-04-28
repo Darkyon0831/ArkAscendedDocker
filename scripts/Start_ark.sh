@@ -40,6 +40,7 @@ if [ $BATTLEYE = "FALSE" ]; then
 fi 
 
 if [ -n $MOD_IDS ]; then
+    echo "Here"
     MODS_ARG="-mods=$MOD_IDS"
 fi
 
