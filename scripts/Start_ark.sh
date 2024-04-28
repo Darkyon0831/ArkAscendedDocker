@@ -86,7 +86,6 @@ while [ ! -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; do
         exit 1
     fi
     sleep 2
-    ls "$ARK_FOLDER/ShooterGame/Saved/Logs"
     elapsed=$((elapsed + 2))
 done
 
