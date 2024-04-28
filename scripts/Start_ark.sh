@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 #!/bin/bash
+ls /home/dark/scripts
 source /home/dark/scripts/common.sh
 
 ServerName="$SESSION_NAME"
