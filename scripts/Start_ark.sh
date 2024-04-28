@@ -21,7 +21,6 @@
 # SOFTWARE.
 
 #!/bin/bash
-ls /home/dark/scripts
 . /home/dark/scripts/common.sh
 
 ServerName="$SESSION_NAME"
@@ -53,7 +52,7 @@ if [  $CLUSTER_ID != ""  ] && [ $CLUSTER_ID != " " ]; then
     CLUSTER_ID_ARG="-clusterID=$CLUSTER_ID"
 fi
 
-server_command="DISPLAY=:1 wine $ARK_FOLDER/ShooterGame/Binaries/Win64/ArkAscendedServer.exe $MAP_NAME?listen?SessionName=$SESSION_NAME?MaxPlayers=$MAX_PLAYERS?ServerPassword=$SERVER_PASSWORD?ServerAdminPassword=$SERVER_ADMIN_PASSWORD?RCONEnabled=True?RCONPort=$RconPort$CUSTOM_ARGS -Port=$Port -log $BATTLEEYE_ARG -WinLiveMaxPlayers=$MAX_PLAYERS $MODS_ARG $CLUSTER_ID_ARG"
+server_command="DISPLAY=:1 wine "$ARK_FOLDER"/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MAP_NAME"?listen?SessionName="$SESSION_NAME"?MaxPlayers="$MAX_PLAYERS"?ServerPassword="$SERVER_PASSWORD"?ServerAdminPassword="$SERVER_ADMIN_PASSWORD"?RCONEnabled=True?RCONPort="$RconPort$CUSTOM_ARGS" -Port="$Port" -log "$BATTLEEYE_ARG" -WinLiveMaxPlayers="$MAX_PLAYERS" "$MODS_ARG" "$CLUSTER_ID_ARG""
 
 if [ -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ]; then
     rm "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log"
