@@ -22,6 +22,7 @@
 
 # Stop_ark.sh <time_to_wait? default is 0 >
 
+#!/bin/bash
 time_to_wait="$1"
 
 if [ "$time_to_wait" = "" ]; then 
