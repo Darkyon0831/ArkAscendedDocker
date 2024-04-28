@@ -21,8 +21,7 @@
 # SOFTWARE.
 
 #!/bin/bash
-
-source "/home/dark/scripts/common.sh"
+source /home/dark/scripts/common.sh
 
 ServerName="$SESSION_NAME"
 MapName="$MAP_NAME"
