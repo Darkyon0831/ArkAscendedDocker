@@ -94,7 +94,7 @@ tail -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" &
 Tail_Pid=$!
 
 wait "$Server_Pid"
-print_message "Server stopped"
 kill "$Tail_Pid"
 print_message "Stopped tailing ShooterGame.log."
+print_message "Server stopped"
 
