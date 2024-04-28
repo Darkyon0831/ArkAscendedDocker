@@ -93,16 +93,6 @@ cat "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log"
 tail -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" &
 Tail_Pid=$!
 
-elapsed=0
-while [ $elapsed -lt $timeout ]; do
-    if [ -f "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log" ] && grep -q "Server started" "$ARK_FOLDER/ShooterGame/Saved/Logs/ShooterGame.log"; then
-        print_message_color_space "Server started successfully. PID: $SERVER_PID"
-        break
-    fi
-    sleep 10
-    elapsed=$((elapsed + 10))
-done
-
 wait "$Server_Pid"
 print_message "Server stopped"
 kill "$Tail_Pid"
