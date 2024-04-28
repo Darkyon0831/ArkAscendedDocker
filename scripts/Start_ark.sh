@@ -27,7 +27,7 @@ ServerName="$SESSION_NAME"
 MapName="$MAP_NAME"
 Port_="$Port"
 ServerPassword="lolipop"
-RconPort=27020
+RconPort="$RCON_PORT"
 Pid_File="/home/dark/.server.pid"
 
 Xvfb :1 -screen 0 1024x768x16 &
