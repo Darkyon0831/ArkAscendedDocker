@@ -32,5 +32,4 @@ if [ "$time_to_wait" -gt 0 ]; then
     /home/dark/scripts/rcon_command "Broadcast Server shutdown started...\nTime to shutdown: $time_to_wait secconds"
     sleep "$time_to_wait"
     /home/dark/scripts/rcon_command "SaveWorld"
-    /home/dark/scripts/rcon_command "SaveWorld"
 fi
