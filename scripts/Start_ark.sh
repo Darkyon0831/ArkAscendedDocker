@@ -26,7 +26,7 @@ MapName="$MAP_NAME"
 Port_="$Port"
 ServerPassword="lolipop"
 RconPort=27020
-$Pid_File="/home/dark/.server.pid"
+Pid_File="/home/dark/.server.pid"
 
 trap shutdown_handler SIGTERM
 
