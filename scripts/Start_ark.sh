@@ -22,7 +22,7 @@
 
 #!/bin/bash
 ls /home/dark/scripts
-source /home/dark/scripts/common.sh
+. /home/dark/scripts/common.sh
 
 ServerName="$SESSION_NAME"
 MapName="$MAP_NAME"
