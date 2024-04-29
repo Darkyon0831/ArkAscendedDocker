@@ -28,7 +28,7 @@ password="$SERVER_ADMIN_PASSWORD"
 send_command ()
 {
     if [ "$1" != "" ]; then
-        rcon_cli --host "$host" --port "$port" --password "$password" "$command" &> /dev/null
+        rcon_cli --host "$host" --port "$port" --password "$password" "$1" &> /dev/null
     else 
         echo "Please enter command to send"
     fi 
