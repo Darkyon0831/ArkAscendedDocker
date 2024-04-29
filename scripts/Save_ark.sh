@@ -21,6 +21,6 @@
 # SOFTWARE.
 
 #!/bin/bash
-rcon_command=/home/dark/scripts/rcon_command.sh
+. /home/dark/scripts/rcon_command.sh
 
-$rcon_command "SaveWorld"
+send_command "SaveWorld"

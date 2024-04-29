@@ -22,22 +22,20 @@
 
 #!/bin/bash
 time_to_wait="$1"
-rcon_command=/home/dark/scripts/rcon_command.sh
+
+. /home/dark/scripts/rcon_command.sh
 
 if [ "$time_to_wait" = "" ]; then 
     time_to_wait=0 
 fi
 
 if [ "$time_to_wait" -gt 0 ]; then
-    $rcon_command "SetMessageOfTheDay \"Server shutdown started...\nTime to shutdown: $time_to_wait secconds\""
-    $rcon_command "ShowMessageOfTheDay"
+    broadcast "Server shutdown started...\\nTime to shutdown: $time_to_wait secconds"
     sleep "$time_to_wait"
-    $rcon_command "SaveWorld"
-    $rcon_command "doexit"
 else
-    $rcon_command "SetMessageOfTheDay \"Server immidiate shutdown started...\""
-    $rcon_command "ShowMessageOfTheDay"
+    broadcast "Server immidiate shutdown started..."
     sleep 6
-    $rcon_command "SaveWorld"
-    $rcon_command "doexit"
 fi
+
+send_command "SaveWorld"
+send_command "doexit"

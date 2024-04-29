@@ -23,11 +23,20 @@
 #!/bin/bash
 host="localhost"
 port="$RCON_PORT"
-command="$1"
 password="$SERVER_ADMIN_PASSWORD"
 
-if [ "$1" != "" ]; then
-    rcon_cli --host "$host" --port "$port" --password "$password" "$command" &> /dev/null
-else 
-    echo "Please enter command to send"
-fi  
+send_command ()
+{
+    if [ "$1" != "" ]; then
+        rcon_cli --host "$host" --port "$port" --password "$password" "$command" &> /dev/null
+    else 
+        echo "Please enter command to send"
+    fi 
+}
+
+broadcast ()
+{
+    send_command "SetMessageOfTheDay \"$1\""
+    send_command "howMessageOfTheDay"
+    send_command "SetMessageOfTheDay \"$MOTD\""
+}
