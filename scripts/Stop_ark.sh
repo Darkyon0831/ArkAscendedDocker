@@ -30,7 +30,7 @@ if [ "$time_to_wait" = "" ]; then
 fi
 
 if [ "$time_to_wait" -gt 0 ]; then
-    broadcast "Server shutdown started...\\nTime to shutdown: $time_to_wait secconds"
+    broadcast "Server shutdown started...       Time to shutdown: $time_to_wait secconds"
     sleep "$time_to_wait"
 else
     broadcast "Server immidiate shutdown started..."
