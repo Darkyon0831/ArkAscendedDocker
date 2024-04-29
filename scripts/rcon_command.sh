@@ -37,7 +37,7 @@ send_command ()
 broadcast ()
 {
     test="Test"
-    send_command "SetMessageOfTheDay \"$1\"\"$test\""
+    send_command "SetMessageOfTheDay \"$1\"\n\"$test\""
     send_command "ShowMessageOfTheDay"
 
     send_command "SetMessageOfTheDay \"$MOTD\""
