@@ -53,6 +53,7 @@ if [  $CLUSTER_ID != ""  ] && [ $CLUSTER_ID != " " ]; then
 fi
 
 rm "$ARK_FOLDER/steamapps/appmanifest_2430930.acf"
+print_message_color "Removed appmanifest for test purpose"
 
 server_command="DISPLAY=:1 wine "$ARK_FOLDER"/ShooterGame/Binaries/Win64/ArkAscendedServer.exe "$MAP_NAME"?listen?SessionName=\"$SESSION_NAME\"?MaxPlayers="$MAX_PLAYERS"?ServerPassword="$SERVER_PASSWORD"?ServerAdminPassword="$SERVER_ADMIN_PASSWORD"?RCONEnabled=True?RCONPort="$RconPort$CUSTOM_ARGS" -Port="$Port" -log "$BATTLEEYE_ARG" -WinLiveMaxPlayers="$MAX_PLAYERS" "$MODS_ARG" "$CLUSTER_ID_ARG""
 
